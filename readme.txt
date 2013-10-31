@@ -26,6 +26,10 @@ When you work quite a bit with WordPress Multisites, sometimes you need more inf
 	 * If you will develop with the alternative to this function from my source, then use the method `get_blog_list()` in class `Multisite_Core`. She use also caching with the Transient API. See more about the function on the function in [`inc/autoload/class-core.php`](https://github.com/bueltge/WordPress-Multisite-Enhancements/blob/master/inc/autoload/class-core.php).
 	 * If you use WordPress version 3.7 and higher, then check the function `wp_get_sites()`, the new alternmative funciton inside the core to get all sides inside the network. The function accept a Array with arguments, see the [description](http://wpseek.com/wp_get_sites/).
 
+**Made by [Inpsyde](http://inpsyde.com) &middot; We love WordPress**
+
+Have a look at the premium plugins in our [market](http://marketpress.com).
+
 == Installation ==
 
 = Requirements =
@@ -41,7 +45,6 @@ When you work quite a bit with WordPress Multisites, sometimes you need more inf
  1. No options, no settings, it works
 
 == Screenshots ==
-
  1. Blog ID on Sites
  1. User ID on Users
  1. Add New link to install new plugin on each blog
