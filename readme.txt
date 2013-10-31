@@ -36,20 +36,20 @@ When you work quite a bit with WordPress Multisites, sometimes you need more inf
  * Use the installer via back-end of your install or ...
 
  1. Unpack the download-package
- 2. Upload the files to the `/wp-content/plugins/` directory
- 3. Activate the plugin through the 'Network/Plugins' menu in WordPress and hit 'Network Activate'
- 4. No options, no settings, it works
+ 1. Upload the files to the `/wp-content/plugins/` directory
+ 1. Activate the plugin through the 'Network/Plugins' menu in WordPress and hit 'Network Activate'
+ 1. No options, no settings, it works
 
 == Screenshots ==
 
  1. Blog ID on Sites
- 2. User ID on Users
- 3. Add New link to install new plugin on each blog
- 4. Manage Comments with Counter on Admin Bar
- 5. On which blog is the plugin active
- 6. On which blog is the theme active
- 7. New Admin footer text
- 8. Favicon on Admin bar
+ 1. User ID on Users
+ 1. Add New link to install new plugin on each blog
+ 1. Manage Comments with Counter on Admin Bar
+ 1. On which blog is the plugin active
+ 1. On which blog is the theme active
+ 1. New Admin footer text
+ 1. Favicon on Admin bar
 
 == Other Notes ==
 
