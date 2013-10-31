@@ -30,16 +30,6 @@ When you work quite a bit with WordPress Multisites, sometimes you need more inf
 
 Have a look at the premium plugins in our [market](http://marketpress.com).
 
-== Screenshots ==
- 1. Blog ID on Sites
- 1. User ID on Users
- 1. Add New link to install new plugin on each blog
- 1. Manage Comments with Counter on Admin Bar
- 1. On which blog is the plugin active
- 1. On which blog is the theme active
- 1. New Admin footer text
- 1. Favicon on Admin bar
-
 == Installation ==
 
 = Requirements =
@@ -53,6 +43,16 @@ Have a look at the premium plugins in our [market](http://marketpress.com).
  1. Upload the files to the `/wp-content/plugins/` directory
  1. Activate the plugin through the 'Network/Plugins' menu in WordPress and hit 'Network Activate'
  1. No options, no settings, it works
+
+== Screenshots ==
+ 1. Blog ID on Sites
+ 1. User ID on Users
+ 1. Add New link to install new plugin on each blog
+ 1. Manage Comments with Counter on Admin Bar
+ 1. On which blog is the plugin active
+ 1. On which blog is the theme active
+ 1. New Admin footer text
+ 1. Favicon on Admin bar
 
 == Other Notes ==
 
