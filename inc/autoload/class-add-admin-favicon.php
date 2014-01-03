@@ -17,7 +17,7 @@
  *     - Default is: TRUE
  * 
  * @since    07/23/2013
- * @version  10/27/2013
+ * @version  11/13/2013
  */
 
 add_action( 'init', array( 'Multisite_Add_Admin_Favicon', 'init' ) );
@@ -89,6 +89,7 @@ class Multisite_Add_Admin_Favicon {
 		if ( file_exists( $stylesheet_dir . '/favicon.ico' ) ) {
 			$output  = '<link rel="shortcut icon" type="image/x-icon" href="' . $stylesheet_dir_uri . '/favicon.ico" />';
 			$output .= '<style>';
+			$output .= '#wpadminbar #wp-admin-bar-site-name>.ab-item:before { content: none !important;}';
 			$output .= 'li#wp-admin-bar-site-name a { background: url( "' 
 				. $stylesheet_dir_uri . '/favicon.ico" ) left center no-repeat !important; padding-left: 21px !important } li#wp-admin-bar-site-name { margin-left: 5px !important; } li#wp-admin-bar-site-name {} #wp-admin-bar-site-name div a { background: none !important; }' . "\n";
 			$output .= '</style>';
@@ -131,6 +132,7 @@ class Multisite_Add_Admin_Favicon {
 			$stylesheet_dir     = "$theme_root/$stylesheet";
 			
 			if ( file_exists( $stylesheet_dir . '/favicon.ico' ) ) {
+				$output .= '#wpadminbar .quicklinks li .blavatar { font-size: 0 !important; }';
 				$output .= '#wp-admin-bar-blog-' . $blog['blog_id'] . ' div.blavatar { background: url( "' 
 					. $stylesheet_dir_uri . '/favicon.ico" ) center center no-repeat !important; }' . "\n";
 			}
