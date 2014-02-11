@@ -80,7 +80,7 @@ class Multisite_Add_Plugin_List {
 		if ( $active_on_network ) {
 			// We don't need to check any further for network active plugins
 			$output .= __( '<nobr>Network Activated</nobr>', 'multisite_enhancements' );
-		
+
 		// list Blogs, there is activated
 		} else {
 			// Is this plugin active on any blogs in this network
@@ -97,6 +97,12 @@ class Multisite_Add_Plugin_List {
 				$output .= '</ul>';
 			}
 		}
+		
+		// Add indicator that the plugin is "Network Only".
+		if ( $plugin_data[ 'Network' ] )
+			$output .= '<br /><nobr class="submitbox"><span class="submitdelete">' 
+				. __( ' Network Only', 'multisite_enhancements' )
+				. '</span></nobr>';
 		
 		echo $output;
 	}
