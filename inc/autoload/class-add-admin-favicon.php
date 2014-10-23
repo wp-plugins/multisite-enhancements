@@ -32,7 +32,7 @@ class Multisite_Add_Admin_Favicon {
 	 */
 	static protected $favicon_hooks = array(
 		'admin_head',
-		'wp_head'
+		'wp_head',
 	);
 
 	/**
@@ -92,11 +92,13 @@ class Multisite_Add_Admin_Favicon {
 		$output             = '';
 
 		if ( file_exists( $stylesheet_dir . $this->get_favicon_path() ) ) {
-			$output = '<link rel="shortcut icon" type="image/x-icon" href="' . esc_url( $stylesheet_dir_uri . $this->get_favicon_path() ) . '" />';
+			$output .= '<link rel="shortcut icon" type="image/x-icon" href="'
+				. esc_url( $stylesheet_dir_uri . $this->get_favicon_path() ) . '" />';
 			$output .= '<style>';
 			$output .= '#wpadminbar #wp-admin-bar-site-name>.ab-item:before { content: none !important;}';
 			$output .= 'li#wp-admin-bar-site-name a { background: url( "'
-			           . $stylesheet_dir_uri . $this->get_favicon_path() . '" ) left center/20px no-repeat !important; padding-left: 21px !important; background-size: 20px !important; } li#wp-admin-bar-site-name { margin-left: 5px !important; } li#wp-admin-bar-site-name {} #wp-admin-bar-site-name div a { background: none !important; }' . "\n";
+				. $stylesheet_dir_uri . $this->get_favicon_path()
+				. '" ) left center/20px no-repeat !important; padding-left: 21px !important; background-size: 20px !important; } li#wp-admin-bar-site-name { margin-left: 5px !important; } li#wp-admin-bar-site-name {} #wp-admin-bar-site-name div a { background: none !important; }' . "\n";
 			$output .= '</style>';
 		}
 
@@ -136,10 +138,16 @@ class Multisite_Add_Admin_Favicon {
 			$theme_root     = get_theme_root( $stylesheet );
 			$stylesheet_dir = "$theme_root/$stylesheet";
 
-			if ( file_exists( $stylesheet_dir . $this->get_favicon_path() ) ) {
-				$output .= '#wpadminbar .quicklinks li .blavatar { font-size: 0 !important; }';
-				$output .= '#wp-admin-bar-blog-' . $blog[ 'blog_id' ] . ' div.blavatar { background: url( "'
-				           . $stylesheet_dir_uri . $this->get_favicon_path() . '" ) center center/16px no-repeat !important; background-size: 16px !important; }' . "\n";
+			// create favicon directory and directory url locations
+			$favicon_dir_uri = $this->get_favicon_path( $blog[ 'blog_id' ], $stylesheet_dir_uri, 'url' );
+			$favicon_dir     = $this->get_favicon_path( $blog[ 'blog_id' ], $stylesheet_dir, 'dir' );
+
+			if ( file_exists( $favicon_dir ) ) {
+				$output .= '#wpadminbar .quicklinks li#wp-admin-bar-blog-' . $blog[ 'blog_id' ]
+					. ' .blavatar { font-size: 0 !important; }';
+				$output .= '#wp-admin-bar-blog-' . $blog[ 'blog_id' ]
+					. ' div.blavatar { background: url( "' . $favicon_dir_uri
+					. '" ) left bottom/16px no-repeat !important; background-size: 16px !important; margin: 0 2px 0 -2px; }' . "\n";
 			}
 		}
 
@@ -181,9 +189,18 @@ class Multisite_Add_Admin_Favicon {
 	 *
 	 * @since 1.0.5
 	 *
+	 * @param  integer ID of blog in network
+	 * @param  string  Path to Favicon
+	 * @param  string  Path type 'url' or 'dir'
+	 *
 	 * @return string File path to favicon file.
 	 */
-	protected function get_favicon_path() {
+	protected function get_favicon_path( $blog_id = '', $path = '', $path_type = 'url' ) {
+
+		if ( empty( $blog_id ) ) {
+			$blog_id = get_current_blog_id();
+		}
+
 		/**
 		 * Filter the file path to the favicon file.
 		 *
@@ -193,8 +210,17 @@ class Multisite_Add_Admin_Favicon {
 		 * @since 1.0.5
 		 *
 		 * @param string $favicon_file_path Path to favicon file.
+		 *
+		 * Optional parameters:
+		 *
+		 * When using a different directory than the stylesheet use the $blog_id and $path_type
+		 *
+		 * $path_type = 'url' -> use URL for the location as a URL
+		 * $path_type = 'dir' -> use URL for the location in the server, used to check if the file exists
+		 *
 		 */
-		return apply_filters( 'multisite_enhancements_favicon_path', '/favicon.ico' );
+
+		return apply_filters( 'multisite_enhancements_favicon_path', $path . '/favicon.ico', $blog_id, $path_type );
 	}
 
 } // end class
