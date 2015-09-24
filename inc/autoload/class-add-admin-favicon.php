@@ -18,7 +18,7 @@
  *     - Default is: TRUE
  *
  * @since   2015-07-23
- * @version 2015-08-20
+ * @version 2015-09-24
  * @package WordPress
  */
 
@@ -147,6 +147,11 @@ class Multisite_Add_Admin_Favicon {
 	 */
 	public function set_admin_bar_blog_icon() {
 
+		// Only usable if the user is logged in and use the admin bar.
+		if ( ! is_user_logged_in() || ! is_admin_bar_showing() ) {
+			return;
+		}
+
 		if ( function_exists( 'wp_get_sites' ) ) {
 			// Since 3.7 inside the Core.
 			$blogs = wp_get_sites(
@@ -181,8 +186,12 @@ class Multisite_Add_Admin_Favicon {
 			$favicon_dir     = $this->get_favicon_path( $blog_id, $stylesheet_dir, 'dir' );
 
 			// Check if the user has manually added a site icon in WP (since WP 4.3).
-			if ( function_exists( 'has_site_icon' ) && has_site_icon( $blog_id ) ) {
-				$custom_icon = esc_url( get_site_icon_url( 32, '', $blog_id ) );
+			$site_icon_id = (int) get_blog_option( $blog_id, 'site_icon' );
+			if ( 0 !== $site_icon_id ) {
+				switch_to_blog( $blog_id );
+				$url_data = wp_get_attachment_image_src( $site_icon_id, array( 32, 32 ) );
+				$custom_icon = esc_url( $url_data[0] );
+				restore_current_blog();
 			} else if ( file_exists( $favicon_dir ) ) {
 				$custom_icon = $favicon_dir_uri;
 			}
@@ -204,7 +213,7 @@ class Multisite_Add_Admin_Favicon {
 			 */
 			echo apply_filters(
 				'multisite_enhancements_add_admin_bar_favicon',
-				'<style>' . $output . '</style>' . "\n"
+				"\n" . '<style>' . $output . '</style>' . "\n"
 			);
 		}
 	}
