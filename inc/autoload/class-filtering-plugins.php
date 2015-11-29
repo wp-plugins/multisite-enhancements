@@ -2,7 +2,7 @@
 /**
  * Add simple javascript to filter the plugin list on network and single plugin page of WordPress back end.
  *
- * @since   2015-11-28
+ * @since   2015-11-29
  * @package WordPress
  */
 
@@ -37,9 +37,11 @@ class Filtering_Plugins {
 	 */
 	public function enqueue_script() {
 
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		wp_register_script(
 			'me_filtering_plugins',
-			plugins_url( '/inc/assets/js/filtering-plugins.js', MULTISITE_ENHANCEMENT_BASE ),
+			plugins_url( '/inc/assets/js/filtering-plugins' . $suffix . '.js', MULTISITE_ENHANCEMENT_BASE ),
 			array( 'jquery' ),
 			2015 - 11 - 28,
 			TRUE
